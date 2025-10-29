@@ -278,7 +278,7 @@ def install(  # pylint: disable=too-many-arguments,too-many-locals,too-many-stat
 
     venv_python = os.path.join(venv_bin, 'python')
 
-    pw_root = os.environ.get('PW_ROOT')
+    pw_root = os.path.realpath(os.environ.get('PW_ROOT'))
     if not pw_root and env:
         pw_root = env.PW_ROOT
     if not pw_root:
