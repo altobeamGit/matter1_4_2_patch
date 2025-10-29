@@ -72,6 +72,7 @@ declare_args() {
       chip_device_platform == "webos" || chip_device_platform == "cc32xx" ||
       chip_device_platform == "bl602" || chip_device_platform == "beken" ||
       chip_device_platform == "mt793x" || chip_device_platform == "asr" ||
+      chip_device_platform == "atbm" ||
       (chip_device_platform == "darwin" && current_os == "mac")
 
   # Enable ethernet support
@@ -99,7 +100,8 @@ declare_args() {
       chip_device_platform == "ameba" || chip_device_platform == "webos" ||
       chip_device_platform == "cc32xx" || chip_device_platform == "beken" ||
       chip_device_platform == "mt793x" || chip_device_platform == "asr" ||
-      chip_device_platform == "openiotsdk" || chip_device_platform == "nuttx") {
+      chip_device_platform == "openiotsdk" || chip_device_platform == "nuttx" ||
+      chip_device_platform == "atbm") {
     chip_mdns = "minimal"
   } else if (chip_device_platform == "darwin" ||
              chip_device_platform == "cc13x4_26x4" || current_os == "android" ||
@@ -216,6 +218,8 @@ if (chip_device_platform == "cc13x4_26x4") {
   _chip_device_layer = "NuttX"
 } else if (chip_device_platform == "stm32") {
   _chip_device_layer = "stm32"
+} else if (chip_device_platform == "atbm") {
+  _chip_device_layer = "atbm"
 }
 
 declare_args() {
@@ -282,5 +286,6 @@ assert(
         chip_device_platform == "bl702l" || chip_device_platform == "mt793x" ||
         chip_device_platform == "SiWx917" ||
         chip_device_platform == "openiotsdk" || chip_device_platform == "asr" ||
-        chip_device_platform == "stm32" || chip_device_platform == "nuttx",
+        chip_device_platform == "stm32" || chip_device_platform == "nuttx" ||
+        chip_device_platform == "atbm",
     "Please select a valid value for chip_device_platform")

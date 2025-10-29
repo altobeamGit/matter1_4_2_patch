@@ -72,7 +72,7 @@ group("default") {
     } else if (chip_device_platform == "android") {
       deps += [ "${chip_root}/src/platform/android:logging" ]
     } else {
-      assert(chip_device_platform == "fake" ||
+      assert(chip_device_platform == "fake" || chip_device_platform == "atbm" ||
              chip_device_platform == "external" || chip_device_platform == "none")
     }
   } else if (chip_logging_backend == "none" ||

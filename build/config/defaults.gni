@@ -102,7 +102,7 @@ declare_args() {
   default_configs_arc = [ "${build_root}/config/compiler:arc_default" ]
 
   # Extra default configs.
-  default_configs_extra = []
+  default_configs_extra = [ "${build_root}/config/compiler:n25_extern" ]
 }
 
 default_configs = []

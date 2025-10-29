@@ -1,0 +1,26 @@
+%rename link	picolibc_link
+%rename cpp	picolibc_cpp
+%rename cc1	picolibc_cc1
+%rename cc1plus	picolibc_cc1plus
+
+*cpp:
+-isystem %{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/include;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/include} %(picolibc_cpp)
+
+*cc1:
+ %(picolibc_cc1) 
+
+*cc1plus:
+-isystem %{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/include;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/include} -idirafter %{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/include;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/include}  %(picolibc_cc1plus)  
+
+*link:
+ -L%{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/lib/%M;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/lib/%M} -L%{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/lib;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/lib} %{!T:-Tpicolibc.ld} %(picolibc_link) --gc-sections 
+
+*lib:
+--start-group %(libgcc)  -lc %{-oslib=*:-l%*} --end-group
+
+*endfile:
+
+
+*startfile:
+%{-picolibc-prefix=*:%*/picolibc/ndsv5-unknown-elf/lib/%M/crt0%{-crt0=*:-%*%O;:%O}%s;:/local/sqa/Jenkins/workspace/build-system-3-ast533/toolchain/nds32le-elf-mculib-v5/picolibc/ndsv5-unknown-elf/lib/%M/crt0%{-crt0=*:-%*%O;:%O}%s} 
+
